@@ -1,6 +1,6 @@
 # Everest JS
 
-Ready to run Node JS version of [Evernote API](http://dev.evernote.com/documentation/reference/). Everest is an example of how to creating Evernote RESTful Web Services from many related components. I put it all to gather to make it easier for the beginner.
+Ready to run Node JS version of [Evernote API](http://dev.evernote.com/documentation/reference/). Everest is an example of how to create Evernote RESTful Web Services from many Node.js components. I put it all to gather to make it easier for the beginner.
 
 ## To do
 1. Edit file config.js (use your Evernote API key) 
