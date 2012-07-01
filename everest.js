@@ -68,7 +68,7 @@ app.all('/authentication', function(req, res){
 	
   evernote.oAuth(evernote_callback).getOAuthRequestToken( function(error, oauthToken, oauthTokenSecret, results){
 		
-		if (error) return res.send("Error getting OAuth request token : " + sys.inspect(error), 500);
+		if (error) return res.send("Error getting OAuth request token : " + util.inspect(error), 500);
 
     req.session.oauthRequestToken = oauthToken;
     res.redirect( evernote.oAuthRedirectUrl(oauthToken) );      
