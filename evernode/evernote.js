@@ -76,7 +76,7 @@ Evernote.prototype.getUser = function (authToken, callback){
 		- sortOrder
 		- ascending
 		- inactive
- * @param  { function (err, EDAMUser) } authToken
+ * @param  { function (err, EDAMNoteList ) } callback
  */
 Evernote.prototype.findNotes = function(user, words, option, callback)
 {
@@ -113,7 +113,7 @@ Evernote.prototype.findNotes = function(user, words, option, callback)
  * 		- withResourcesData
  * 		- withResourcesRecognition
  * 		- withResourcesAlternateData
- * @param  { function (err, EDAMUser) } authToken
+ * @param  { function (err, ED) } callback
  */
 Evernote.prototype.getNote = function(userInfo, guid, option, callback)
 {
@@ -143,7 +143,7 @@ Evernote.prototype.getNote = function(userInfo, guid, option, callback)
  * createNote
  * @param  { EdamUser } user
  * @param  { EdamNote }	note
- * @param  { function (err, EDAMUser) } authToken
+ * @param  { function (err, EDAMUser) } callback
  */
 Evernote.prototype.createNote = function(userInfo, note, callback){
 	
@@ -170,7 +170,7 @@ Evernote.prototype.createNote = function(userInfo, note, callback){
  * updateNote
  * @param  { EdamUser } user
  * @param  { EdamNote }	note
- * @param  { function (err, EDAMUser) } authToken
+ * @param  { function (err, EDAMUser) } callback
  */
 Evernote.prototype.updateNote = function(userInfo, note, callback){
 	
@@ -219,7 +219,7 @@ Evernote.prototype.deleteNote = function(userInfo, guid, callback){
  * @param  { Option (optional) } option 
  * 		- noteOnly,
  * 		- tokenizeForIndexing
- * @param  { function (err, EDAMUser) } authToken
+ * @param  { function (err, EDAMUser) } callback
  */
 Evernote.prototype.getNoteSearchText = function(userInfo, guid, option, callback)
 {
@@ -244,6 +244,107 @@ Evernote.prototype.getNoteSearchText = function(userInfo, guid, option, callback
 }
 
 
+//=====================================================================================================
+
+
+/**
+ * listTags
+ * @param  { EDAMUser } user
+ * @param  { function (err, Array<EDAMTag> ) } callback
+ */
+Evernote.prototype.listTags = function(user, callback)
+{	
+	if(!user || !user.shardId || !user.authToken) throw 'Argument Execption';
+	callback = callback || function (){}
+	
+	var noteStore = this.createNoteStore(user.shardId);
+	
+	noteStore.listTags(user.authToken, function(err, response) {
+    callback(err, response)
+  });
+}
+
+/**
+ * getTag
+ * @param  { EDAMUser } user
+ * @param  { String }		guid
+ * @param  { function (err, EDAMUser) } callback
+ */
+Evernote.prototype.getTag = function(userInfo, guid, callback)
+{
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'ArgumentExecption';
+	if(!guid) throw 'ArgumentExecption';
+
+	if(typeof callback != 'function') throw 'ArgumentExecption';
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+
+	noteStore.getTag(userInfo.authToken, guid, function(err, response) {
+    callback(err, response);
+  });
+}
+
+/**
+ * createTag
+ * @param  { EDAMUser } user
+ * @param  { EDAMTag }	tag
+ * @param  { function (err, EDAMTag) } callback
+ */
+Evernote.prototype.createTag = function(userInfo, tag, callback){
+	
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'Argument Execption';
+	if(typeof tag 		 != 'object') throw 'Argument Execption';
+	if(typeof callback != 'function') throw 'Argument Execption';
+	
+	tag = new Types.Tag(tag);
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+	
+	noteStore.createTag(userInfo.authToken, tag, function(err, response) {
+    callback(err, response)
+  });
+}
+
+/**
+ * updateNote
+ * @param  { EDAMUser } user
+ * @param  { EDAMTag }	tag
+ * @param  { function (err, number) } callback
+ */
+Evernote.prototype.updateTag = function(userInfo, tag, callback){
+	
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'Argument Execption';
+	if(typeof tag 		 != 'object') throw 'Argument Execption';
+	if(typeof callback != 'function') throw 'Argument Execption';
+	
+	tag = new Types.Tag(tag);
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+	
+	noteStore.updateTag(userInfo.authToken, tag, function(err, response) {
+    callback(err, response)
+  });
+}
+
+/**
+ * expungeTag
+ * @param  { EdamUser } user
+ * @param  { String }	guid
+ * @param  { function (err, updateSequence) } authToken
+ */
+Evernote.prototype.expungeTag = function(userInfo, guid, callback){
+	
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'Argument Execption';
+	if(typeof callback != 'function') throw 'Argument Execption';
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+	
+	noteStore.expungeTag(userInfo.authToken, guid, function(err, response) {
+    callback(err, response)
+  });
+}
+
+//=====================================================================================================
 
 /**
  * getFilteredSyncChunk

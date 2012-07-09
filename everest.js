@@ -229,6 +229,107 @@ app.all('/notes/:guid/delete', function(req, res){
   });
 });
 
+
+//===================================================
+//										Tags
+//===================================================
+
+app.get('/tags', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	
+	var userInfo = req.session.user;
+	
+	evernote.listTags(userInfo, function(err, tagList) {
+    if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } else {
+			return res.send(tagList,200);
+    }
+  });
+});
+
+app.post('/tags', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	if(!req.body) return res.send('Invalid content',400);
+
+	var tag = req.body;
+	var userInfo = req.session.user;
+	
+	evernote.createTag(userInfo, tag, function(err, tag) {
+		
+		if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send(tag,200);
+  });
+});
+
+app.get('/tags/:guid', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	if(!req.body) return res.send('Invalid content',400);
+	
+	var userInfo = req.session.user;
+	var guid = req.params.guid;
+
+	evernote.getTag(userInfo, guid, function(err, tag) {
+		
+		if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send(tag,200);
+  });
+});
+
+app.post('/tags/:guid', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	if(!req.body) return res.send('Invalid content',400);
+	
+	var tag = req.body;
+	var userInfo = req.session.user;
+	
+	tag.guid = req.params.guid;
+	
+	evernote.updateTag(userInfo, tag, function(err, tag) {
+		
+		if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send(tag,200);
+  });
+	
+});
+
+app.all('/tags/:guid/expunge', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+
+	var userInfo = req.session.user;
+	var guid = req.params.guid;
+	
+	evernote.expungeTag(userInfo, guid, function(err, updateSequence) {
+    if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send({updateSequence: updateSequence},200);
+  });
+});
+
+
+
+
 //===================================================
 //									  Sync
 //===================================================
