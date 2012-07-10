@@ -15,11 +15,20 @@ Ready to run Node JS version of [Evernote API](http://dev.evernote.com/documenta
 
 ## Credit
 
-This project is based on [evernode](https://github.com/cloudsnap/evernode) released by the Reno Collective team that created [Colorstache](http://www.colorstache.com/) in Evernote Developer Competition 2011.
+This was released by the [Evercalendar](http://evercalendar.co) team in Evernote DevCup 2012. 
+
+Please, vist our website and give us some feedback. If you like our app, don't forget to [vote](http://devcup.evernote.com/submissions/8463-evercalendar) for us (apologies for the shameless self promotion).
 
 ##REST API
-- GET		/me	
-- GET		/notes
-- GET		/notes/<guid>	
-- POST	/notes/<guid>	
-- POST	/notes/<guid>/delete
+
+- GET   /me                       - User Infomation
+
+- GET   /notes                    - NoteStore.findNotes
+- GET   /notes/<guid>	          - NoteStore.getNote
+- POST  /notes/<guid>	          - NoteStore.updateNote
+- POST  /notes/<guid>/delete      - NoteStore.deleteNote
+
+- GET   /tags                     - NoteStore.listTags
+- GET   /tags/<guid>	          - NoteStore.getTag
+- POST  /tags/<guid>	          - NoteStore.updateTag
+- POST  /tags/<guid>/expunge      - NoteStore.expungeTag
