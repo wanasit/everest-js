@@ -328,6 +328,104 @@ app.all('/tags/:guid/expunge', function(req, res){
 });
 
 
+//===================================================
+//										Notebooks
+//===================================================
+
+app.get('/notebooks', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	
+	var userInfo = req.session.user;
+	
+	evernote.listNotebooks(userInfo, function(err, tagList) {
+    if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } else {
+			return res.send(tagList,200);
+    }
+  });
+});
+
+app.post('/notebooks', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	if(!req.body) return res.send('Invalid content',400);
+
+	var notebook = req.body;
+	var userInfo = req.session.user;
+	
+	evernote.createNotebook(userInfo, notebook, function(err, tag) {
+		
+		if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send(tag,200);
+  });
+});
+
+app.get('/notebooks/:guid', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	if(!req.body) return res.send('Invalid content',400);
+	
+	var userInfo = req.session.user;
+	var guid = req.params.guid;
+
+	evernote.getNotebook(userInfo, guid, function(err, notebook) {
+		
+		if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send(notebook,200);
+  });
+});
+
+app.post('/notebooks/:guid', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+	if(!req.body) return res.send('Invalid content',400);
+	
+	var notebook = req.body;
+	var userInfo = req.session.user;
+	
+	tag.guid = req.params.guid;
+	
+	evernote.updateNotebook(userInfo, notebook, function(err, updateSequence) {
+		
+		if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send(updateSequence,200);
+  });
+	
+});
+
+app.all('/notebooks/:guid/expunge', function(req, res){
+	
+	if(!req.session.user) return res.send('Unauthenticate',401);
+
+	var userInfo = req.session.user;
+	var guid = req.params.guid;
+	
+	evernote.expungeNotebook(userInfo, guid, function(err, updateSequence) {
+    if (err) {
+			if(err == 'EDAMUserException') return res.send(err,403);
+      return res.send(err,500);
+    } 
+
+		return res.send({updateSequence: updateSequence},200);
+  });
+});
+
+
 
 
 //===================================================

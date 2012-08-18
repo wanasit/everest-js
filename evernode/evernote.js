@@ -346,6 +346,107 @@ Evernote.prototype.expungeTag = function(userInfo, guid, callback){
 
 //=====================================================================================================
 
+
+/**
+ * listNotebooks
+ * @param  { EDAMUser } user
+ * @param  { function (err, Array<EDAMNotebook> ) } callback
+ */
+Evernote.prototype.listNotebooks = function(user, callback)
+{	
+	if(!user || !user.shardId || !user.authToken) throw 'Argument Execption';
+	callback = callback || function (){}
+	
+	var noteStore = this.createNoteStore(user.shardId);
+	
+	noteStore.listNotebooks(user.authToken, function(err, response) {
+    callback(err, response)
+  });
+}
+
+/**
+ * getNotebook
+ * @param  { EDAMUser } user
+ * @param  { String }		guid
+ * @param  { function (err, EDAMNotebook) } callback
+ */
+Evernote.prototype.getNotebook = function(userInfo, guid, callback)
+{
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'ArgumentExecption';
+	if(!guid) throw 'ArgumentExecption';
+
+	if(typeof callback != 'function') throw 'ArgumentExecption';
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+
+	noteStore.getNotebook(userInfo.authToken, guid, function(err, response) {
+    callback(err, response);
+  });
+}
+
+/**
+ * createNotebook
+ * @param  { EDAMUser } user
+ * @param  { EDAMNotebook }	notebook
+ * @param  { function (err, EDAMNotebook) } callback
+ */
+Evernote.prototype.createNotebook = function(userInfo, notebook, callback){
+	
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'Argument Execption';
+	if(typeof notebook 		 != 'object') throw 'Argument Execption';
+	if(typeof callback != 'function') throw 'Argument Execption';
+	
+	notebook = new Types.Notebook(notebook);
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+	
+	noteStore.createNotebook(userInfo.authToken, notebook, function(err, response) {
+    callback(err, response)
+  });
+}
+
+/**
+ * updateNotebook
+ * @param  { EDAMUser } user
+ * @param  { EDAMNotebook }	notebook
+ * @param  { function (err, number) } callback
+ */
+Evernote.prototype.updateNotebook = function(userInfo, notebook, callback){
+	
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'Argument Execption';
+	if(typeof tag 		 != 'object') throw 'Argument Execption';
+	if(typeof callback != 'function') throw 'Argument Execption';
+	
+	notebook = new Types.Notebook(notebook);
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+	
+	noteStore.updateNotebook(userInfo.authToken, notebook, function(err, response) {
+    callback(err, response)
+  });
+}
+
+/**
+ * expungeNotebook
+ * @param  { EdamUser } user
+ * @param  { String }	guid
+ * @param  { function (err, updateSequence) } authToken
+ */
+Evernote.prototype.expungeNotebook = function(userInfo, guid, callback){
+	
+	if(!userInfo || !userInfo.shardId || !userInfo.authToken) throw 'Argument Execption';
+	if(typeof callback != 'function') throw 'Argument Execption';
+	
+	var noteStore = this.createNoteStore(userInfo.shardId);
+	noteStore.expungeNotebook(userInfo.authToken, guid, function(err, response) {
+    callback(err, response)
+  });
+}
+
+
+//=====================================================================================================
+
+
 /**
  * getFilteredSyncChunk
  * @param  { EdamUser } user
