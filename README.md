@@ -24,11 +24,19 @@ Please, vist our website and give us some feedback. If you like our app, don't f
 - GET   /me                       - User Infomation
 
 - GET   /notes                    - NoteStore.findNotes
-- GET   /notes/<guid>	          - NoteStore.getNote
-- POST  /notes/<guid>	          - NoteStore.updateNote
+- POST  /notes                    - NoteStore.createNote
+- GET   /notes/<guid>	            - NoteStore.getNote
+- POST  /notes/<guid>	            - NoteStore.updateNote
 - POST  /notes/<guid>/delete      - NoteStore.deleteNote
 
 - GET   /tags                     - NoteStore.listTags
-- GET   /tags/<guid>	          - NoteStore.getTag
-- POST  /tags/<guid>	          - NoteStore.updateTag
+- POST  /tags                     - NoteStore.createTag
+- GET   /tags/<guid>	            - NoteStore.getTag
+- POST  /tags/<guid>	            - NoteStore.updateTag
 - POST  /tags/<guid>/expunge      - NoteStore.expungeTag
+  
+- GET   /notebooks                  - NoteStore.listNotebooks
+- POST  /notebooks                  - NoteStore.createNotebook
+- GET   /notebooks/<guid>	          - NoteStore.getNotebook
+- POST  /notebooks/<guid>	          - NoteStore.updateNotebook
+- POST  /notebooks/<guid>/expunge   - NoteStore.expungeNotebook
