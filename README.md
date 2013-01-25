@@ -13,12 +13,6 @@ Ready to run Node JS version of [Evernote API](http://dev.evernote.com/documenta
 - node-thrift (https://github.com/wadey/node-thrift) : Branch performace + A few lines fix
 - evernode (https://github.com/cloudsnap/evernode)	 : Using forked version https://github.com/berryboy/evernode
 
-## Credit
-
-This was released by the [Evercalendar](http://evercalendar.co) team in Evernote DevCup 2012. 
-
-Please, vist our website and give us some feedback. If you like our app, don't forget to [vote](http://devcup.evernote.com/submissions/8463-evercalendar) for us (apologies for the shameless self promotion).
-
 ##REST API
 
 - GET   /me                       - User Infomation
