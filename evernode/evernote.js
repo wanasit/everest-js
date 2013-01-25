@@ -438,6 +438,7 @@ Evernote.prototype.expungeNotebook = function(userInfo, guid, callback){
 	if(typeof callback != 'function') throw 'Argument Execption';
 	
 	var noteStore = this.createNoteStore(userInfo.shardId);
+	
 	noteStore.expungeNotebook(userInfo.authToken, guid, function(err, response) {
     callback(err, response)
   });

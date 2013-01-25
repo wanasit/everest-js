@@ -13,7 +13,7 @@ var thrift = require('thrift'),
     NoteStore = require('../lib/evernote-thrift/gen-nodejs/NoteStore');
 
 var evernoteServer = "sandbox.evernote.com"; //For production use: www.evernote.com
-var oAuthToken = "XXXXXXXXX"; //OAuth Token of the user
+var oAuthToken = "S=s1:U=ea8f:E=14362c3b643:C=13c0b128a43:P=1cd:A=en-devtoken:H=93d5cc39dcc28ef77fffa2f2fdb64008"; //OAuth Token of the user
 
 var userConnection = customConnections.createHTTPSConnection(evernoteServer, 443, '/edam/user');
 var userClient = thrift.createClient(UserStore, userConnection);

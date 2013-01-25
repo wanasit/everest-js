@@ -11,7 +11,7 @@
   "main": "./lib/evernode",
   "engines": { "node": ">= 0.4.0" },
   "dependencies": {
-    "thrift-dev": "0.8.0-dev02",
+    "thrift-dev": "latest",
     "oauth": "latest"
   }
 }

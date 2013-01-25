@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2008 by EverNote Corporation, All rights reserved.
+ * Copyright 2007-2012 Evernote Corporation.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -24,10 +24,8 @@
  */
 
 /*
- * This file contains the definitions of the EverNote data model as it
- * is represented through the EDAM protocol.  This is the "client-independent"
- * view of the contents of a user's account.  Each client will translate the
- * neutral data model into an appropriate form for storage on that client.
+ * This file contains the definitions of the Evernote-related errors that
+ * can occur when making calls to EDAM services. 
  */
 
 namespace as3 com.evernote.edam.error
@@ -36,14 +34,14 @@ namespace csharp Evernote.EDAM.Error
 namespace py evernote.edam.error
 namespace cpp evernote.edam
 namespace rb Evernote.EDAM.Error
-namespace php edam_error
+namespace php EDAM.Error
 namespace perl EDAMErrors
 
 /**
  * Numeric codes indicating the type of error that occurred on the
  * service.
  * <dl>
- *   <dt>UNKNOWN</dt
+ *   <dt>UNKNOWN</dt>
  *     <dd>No information available about the error</dd>
  *   <dt>BAD_DATA_FORMAT</dt>
  *     <dd>The format of the request data was incorrect</dd>
@@ -67,6 +65,20 @@ namespace perl EDAMErrors
  *     <dd>Content of submitted note was malformed</dd>
  *   <dt>SHARD_UNAVAILABLE</dt>
  *     <dd>Service shard with account data is temporarily down</dd>
+ *   <dt>LEN_TOO_SHORT</dt>
+ *     <dd>Operation denied due to data model limit, where something such
+ *         as a string length was too short</dd>
+ *   <dt>LEN_TOO_LONG</dt>
+ *     <dd>Operation denied due to data model limit, where something such
+ *         as a string length was too long</dd>
+ *   <dt>TOO_FEW</dt>
+ *     <dd>Operation denied due to data model limit, where there were
+ *         too few of something.</dd>
+ *   <dt>TOO_MANY</dt>
+ *     <dd>Operation denied due to data model limit, where there were
+ *         too many of something.</dd>
+ *   <dt>UNSUPPORTED_OPERATION</dt>
+ *     <dd>Operation denied because it is currently unsupported.</dd>
  * </dl>
  */
 enum EDAMErrorCode {
@@ -81,13 +93,17 @@ enum EDAMErrorCode {
   AUTH_EXPIRED = 9,
   DATA_CONFLICT = 10,
   ENML_VALIDATION = 11,
-  SHARD_UNAVAILABLE = 12
+  SHARD_UNAVAILABLE = 12,
+  LEN_TOO_SHORT = 13,
+  LEN_TOO_LONG = 14,
+  TOO_FEW = 15,
+  TOO_MANY = 16,
+  UNSUPPORTED_OPERATION = 17
 }
-
 
 /**
  * This exception is thrown by EDAM procedures when a call fails as a result of 
- * a problem that a user may be able to resolve.  For example, if the user
+ * a problem that a caller may be able to resolve.  For example, if the user
  * attempts to add a note to their account which would exceed their storage
  * quota, this type of exception may be thrown to indicate the source of the
  * error so that they can choose an alternate action.
@@ -110,7 +126,7 @@ exception EDAMUserException {
 
 /**
  * This exception is thrown by EDAM procedures when a call fails as a result of
- * an a problem in the service that could not be changed through user action.
+ * a problem in the service that could not be changed through caller action.
  *
  * errorCode:  The numeric code indicating the type of error that occurred.
  *   must be one of the values of EDAMErrorCode.
@@ -125,14 +141,16 @@ exception EDAMSystemException {
 
 /**
  * This exception is thrown by EDAM procedures when a caller asks to perform
- * an operation that does not exist.  This may be thrown based on an invalid
+ * an operation on an object that does not exist.  This may be thrown based on an invalid
  * primary identifier (e.g. a bad GUID), or when the caller refers to an object
  * by another unique identifier (e.g. a User's email address).
  *
- * identifier:  the object identifier that was not found on the server.
+ * identifier:  A description of the object that was not found on the server.
+ *   For example, "Note.notebookGuid" when a caller attempts to create a note in a
+ *   notebook that does not exist in the user's account.
  *
- * key:  the value passed from the client in the identifier, which was not
- *   found.  E.g. the GUID of an object that was not found.
+ * key:  The value passed from the client in the identifier, which was not
+ *   found. For example, the GUID that was not found.
  */
 exception EDAMNotFoundException {
   1:  optional  string identifier,
