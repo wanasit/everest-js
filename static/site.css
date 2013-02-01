@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+* { margin: 0; padding: 0; font-family: Palatino,Georgia, Times, Arial,Helvetica,sans-serif; color: #999; }
+body{ background-color:#F6F0e9; }
+h2{ color: #999; font-size:44px; font-weight:normal; padding-top:20px;  }
+a{ color: #86BC45; text-decoration:none; cursor:pointer;}
+a:active, a:hover { color: #96cC55; text-decoration:none; }
+
+/*-------------- Footer ----------------*/
+.footer{ margin:20px 20px 20px 20px; }
+
+/*-------------- Main ------------------*/
+
+.top-container, .bottom-container, .container{
+  clear:both; margin:auto; width:900px;
+}
+
+.top-container .logo { margin-top:20px; float:left; }
+.top-container .account { margin-top:60px;  margin-right:210px; float:right; text-align:right;}
+.top-container .account>p{ font-size:22px; margin:0;}
+
+.container .tabs{float:right; width:200px;list-style:none; padding-top:20px; }
+.container .tabs>li>a.active{  background-color:#fff; box-shadow: 4px 0px 6px #ccc; }
+.container .tabs>li>a{ 
+  position:relative; left:-5px;
+  display:block; width:200px; height:30px; padding-top:20px;
+  border-radius:5px;
+  font-size:24px; text-decoration:none;
+  text-align:center;
+}
+
+.container .content.active{ display:block; }
+.container .content{
+  float:left;
+  width:700px;
+  min-height:400px;
+  z-index:100;
+  border-radius:5px;
+  background-color:#fff;
+  box-shadow: 1px 0px 8px #ccc;
+  display:none;
+}
+
+
+
+
+.container .tabs>li:first-child{ margin-top:10px; }
+.container ul>li:first-child{ margin-top:10px; }
+.container ul>li:last-child{ margin-bottom:20px; }
+.container ul>li>a{ color:#999; font-size:18px; text-decoration:none; }
+.container ul>li.active>a, .main-content .sidebar>ul>li>a:hover{ color: #94d467; }
+.container ul>li.inactive, .main-content .sidebar>ul>li.inactive>a{	 cursor: default; color: #ccc; }
+.container ul>li.active>a>*, .main-content .sidebar>ul>li>a:hover>*{ color: #94d467; }
+.container ul>li.inactive>*, .main-content .sidebar>ul>li.inactive>a>*{	 cursor: default; color: #ccc; }
+.container ul>li>a .name{ font-size:22px;	padding-top:1px; padding-bottom:10px; }
+.container ul>li>a .caption{ font-size:14px; }
+

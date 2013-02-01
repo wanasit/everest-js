@@ -51,11 +51,9 @@ app.all('/', function(req, res, next) {
 app.get('/', function(req, res){
 	
 	if(!req.session.user) //Unauthenticate User
-		return res.redirect('/authentication');
+		return res.redirect('/static/login.html');
 		
-	var HelloMsg = 'Hi, '+ req.session.user.name;
-	HelloMsg += " - Welcome to Everest JS!!";
-	return res.send(HelloMsg,200);
+	return res.redirect('/static/indes.html');
 });
 
 //===================================================
