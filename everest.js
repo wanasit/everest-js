@@ -51,9 +51,9 @@ app.all('/', function(req, res, next) {
 app.get('/', function(req, res){
 	
 	if(!req.session.user) //Unauthenticate User
-		return res.redirect('/static/login.html');
+		return res.redirect('/authentication');
 		
-	return res.redirect('/static/indes.html');
+	return res.redirect('/static/index.html');
 });
 
 //===================================================
@@ -92,7 +92,7 @@ app.all('/authentication/callback', function(req, res){
 				req.session.authToken = authToken;
 				req.session.user = edamUser;
 				
-				res.redirect('/me');
+				res.redirect('/');
 			});
   });
 });
