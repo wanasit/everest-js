@@ -118,7 +118,11 @@ HTTPSConnection.responseCallBack = function(thisPtr) {
         //LOG THE MSG
         fs.appendFileSync('received_messages', d)
         
-        thisPtr.emit("dataFromHttps", d);
+        //Wait for logging...
+        setTimeout(function() {
+          thisPtr.emit("dataFromHttps", d);
+        },1000)
+        
       });
 
       res.on('end', function() {
