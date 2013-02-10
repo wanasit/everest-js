@@ -2,7 +2,7 @@
    CustomConnections
    This is based on the connection implementation in the node-thrift library for HTTPS.
 */
-
+var fs = require('fs')
 var sys = require('sys'),
     EventEmitter = require("events").EventEmitter,
     ttransport = require('thrift/lib/thrift/transport'),
@@ -94,6 +94,9 @@ HTTPSConnection.prototype.flushOutData = function(data) {
       method: 'POST',
       headers: headers
     };
+    
+    //LOG THE MSG
+    fs.appendFileSync('sent_messages', data)
 
     var req = https.request(options, HTTPSConnection.responseCallBack(this));
     req.write(data);
@@ -111,6 +114,10 @@ HTTPSConnection.responseCallBack = function(thisPtr) {
       //console.log("headers: ", res.headers);
 
       res.on('data', function(d) {
+        
+        //LOG THE MSG
+        fs.appendFileSync('received_messages', d)
+        
         thisPtr.emit("dataFromHttps", d);
       });
 
