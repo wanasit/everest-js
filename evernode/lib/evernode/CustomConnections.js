@@ -143,11 +143,11 @@ exports.createClient = function(cls, connection) {
     cls = cls.Client;
   }
   
-  var trasport = new connection.transport(undefined, function(buf) {
+  var transport = new connection.transport(undefined, function(buf) {
     connection.write(buf);
   });
   transport.writeBufferSize = 26214400;
-  var client = new cls(, connection.protocol);
+  var client = new cls(transport, connection.protocol);
 
   connection.client = client;
 
