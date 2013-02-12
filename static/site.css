@@ -18,6 +18,14 @@ a:active, a:hover { color: #96cC55; text-decoration:none; }
 .top-container .account { margin-top:60px;  margin-right:210px; float:right; text-align:right;}
 .top-container .account>p{ font-size:22px; margin:0;}
 
+
+.container .login-panel{ margin-top:60px; margin-bottom:30px;  text-align:center; min-height:50px;}
+.container .login-panel>a{ display:block; margin:10px 200px 20px 200px; font-size:22px; padding:20px 40px 20px 40px; }
+
+.container .description>h2{font-size:24px; margin-bottom:5px;}
+.container .description{font-size:15px;}
+
+
 .container .tabs{float:right; width:200px;list-style:none; padding-top:20px; margin:0;}
 .container .tabs>li:first-child{ margin-top:10px; }
 .container .tabs>li>a.active{  background-color:#fff; box-shadow: 4px 0px 6px #ccc; }
