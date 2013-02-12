@@ -25,12 +25,12 @@ function Evernote(consumer_key, consumer_secret, sandbox){
 	
 	this.createNoteStore = function (shardId) {
 	    var noteConnection = CustomConnections.createHTTPSConnection(server, 443, '/edam/note/' + shardId);
-	    return thrift.createClient(NoteStore, noteConnection);
+	    return CustomConnections.createClient(NoteStore, noteConnection);
 	}
 	
 	this.createUserStore = function () {
 	    var userConnection = CustomConnections.createHTTPSConnection(server, 443, '/edam/user');
-			return thrift.createClient(UserStore, userConnection);
+			return CustomConnections.createClient(UserStore, userConnection);
 	}
 	
 	this.oAuth = function(callback_url){
