@@ -1,11 +1,14 @@
 # Everest JS
 
-Ready to run Node JS version of [Evernote API](http://dev.evernote.com/documentation/reference/). Everest is an example of how to create Evernote RESTful Web Services from many Node.js components. I put it all to gather to make it easier for the beginner.
+Everest is a <b>ready to run</b> web application using [Evernote API](http://dev.evernote.com/documentation/reference/). This application is an example of how to create [Node.js](http://nodejs.org) application that connect to Evernote. I puts several modules (Thrift, OAuth, and etc) all together to make it really easy for beginners.
 
-## To do
+## How to run the application
 1. Edit file config.js (use your Evernote API key) 
-2. Run server.js (node everest.js)
+2. Run everest.js (node everest.js)
 3. Open yours browser to http://localhost:8081/
+
+## Others Examples
+There are several other examples in /examples directory. You can run these examples using [Evernote's developer tokens](http://dev.evernote.com/start/core/authentication.php#devtoken).
 
 ## Using Components
 - express (http://expressjs.com/)
@@ -13,7 +16,7 @@ Ready to run Node JS version of [Evernote API](http://dev.evernote.com/documenta
 - node-thrift (https://github.com/wadey/node-thrift) : Branch performace + A few lines fix
 - evernode (https://github.com/cloudsnap/evernode)	 : Using forked version https://github.com/berryboy/evernode
 
-##REST API
+## REST API
 
 - GET   /me                       - User Infomation
 

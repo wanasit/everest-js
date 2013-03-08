@@ -3,10 +3,7 @@
 
 $(function() {
   
-  
-  
   //TABS
-  
   function reloadtabs(){
     
     var hash = document.location.hash;
@@ -21,12 +18,24 @@ $(function() {
   window.onhashchange = reloadtabs;
   reloadtabs();
   
+  //
+  $('.account .logout').click(function() {
+    
+    $.getJSON('/logout', function (user) {
+      window.location = '/';
+    });
+    
+    return false;
+  })
+  
+  
   //------------------------- Get User - example -------------------------
   
   //example_getUser.js
   exampleGetUser(function(err, user) {
     if(err) {
-      $('#username').text('-')
+      alert('Invalid Authentication')
+      window.location = '/';
     }else{
       $('#username').text(user.username)
     }
