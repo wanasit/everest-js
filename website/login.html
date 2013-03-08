@@ -7,16 +7,7 @@
     
     <script src="./lib/jquery/jquery-1.7.1.min.js"></script>
     <script src="./lib/bootstrap/js/bootstrap.js"></script>
-    
-    
-    <script src="./lib/enml-js/lib/xml-writer.js"></script>
-    <script src="./lib/enml-js/lib/xml-parser.js"></script>
-    <script src="./lib/enml-js/enml.js"></script> 
-    
     <script src="./site.js"></script>
-    <script src="./example_findNotes.js"></script>
-    <script src="./example_createNote.js"></script>
-    <script src="./example_getUser.js"></script>
     
     <script>
       
@@ -33,40 +24,29 @@
         <p>On <a href="https://github.com/berryboy/everest-js">GitHub</a></p>
       </div>
       
-      <div class="account">
-        <p class="username" id="username">...</p>
-        <a class="logout" href='/logout'>Logout</a>
-      </div>
+      
       
     </div>
     
     <div class="container">
-      
-      
-      
-      <div class="active content findnotes-example">
-        <input type="text" />
-        <ul>
-        </ul>
+      <div class='login-panel'>
+        <a class='login btn-success' href="/authentication">
+          Login with Evernote
+        </a>
       </div>
       
-      <div class="content create-example">
-        <input type="text" />
-        <textarea></textarea>
-        <a class="btn-success">Create</a>
+      <div class="description">
+        <h2>Welcome to Everest JS's demo-site</h2>
+        <p>This demo website of <a href="http://nodejs.org">Node.js</a> application using <a href="http://dev.evernote.com/documentation/reference/">Evernote API</a>. The source code of this whole website is available on <a href="https://github.com/berryboy/everest-js">Github</a>. Everest is a ready-to-run web application from several node.js components which I put it all to gather to make it easier for the beginner.</p>
+        <p class="pull-right">Wanasit T.</p>
       </div>
-      
-      <ul class="tabs">
-        <li><a class="active findnotes-example" href='#findnotes-example'>Find Notes</a></li>
-        <li><a class="create-example" href='#create-example'>Create</a></li>
-      </ul>
       
     </div> 
     
     <div class="bottom-container">
       <hr>
       <footer>
-        <p>© Berrysoft 2012</p>
+        
       </footer>  
     </div>
     

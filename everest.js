@@ -22,7 +22,7 @@ app.configure('development', function(){
 	app.use(express.bodyParser());
 	
 	//Use static files
-	app.use("/static", express.static(__dirname + '/static'));
+	app.use("/website", express.static(__dirname + '/website'));
 	
 	//Use session
 	app.use(express.session(
@@ -51,9 +51,9 @@ app.all('/', function(req, res, next) {
 app.get('/', function(req, res){
 	
 	if(!req.session.user) //Unauthenticate User
-		return res.redirect('/static/login.html');
+		return res.redirect('/website/login.html');
 		
-	return res.redirect('/static/index.html');
+	return res.redirect('/website/index.html');
 });
 
 //===================================================
@@ -324,7 +324,6 @@ app.all('/tags/:guid/expunge', function(req, res){
 		return res.send({updateSequence: updateSequence},200);
   });
 });
-
 
 //===================================================
 //										Notebooks
